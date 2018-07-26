@@ -1,4 +1,4 @@
-# mycms
+# vue-cms
 
 > A Vue.js project
 
