@@ -1,0 +1,237 @@
+@charset "utf-8";
+@import "./font.scss";
+
+/*
+ * 颜色scss变量
+ */
+
+
+/*背景颜色*/
+
+$color-bg: #ECEFF1;
+
+/*白色*/
+
+$color-white: #FFFFFF;
+
+/*主色调*/
+
+$color-main: #20a0ff;
+$color-main-yellow: #e7bb20;
+
+/*字体颜色*/
+
+$color-font: #566065;
+$color-font-sub: #939DA1;
+$color-font-tips:#B4BCC0;
+//界面颜色
+$color-black:#37474F;
+$color-gray:#CFD8DC;
+$color-lightgray:#ECEFF1;
+$color-border: #dfe6ec;
+$color-dark-border:#455A64;
+$color-icon: #78909C;
+$color-success: #13CE66;
+$color-warning: #F7BA2A;
+$color-danger: #FF4949;
+//功能模块颜色
+$color-skyblue: #29B6F6;
+$color-light-cyan:#26C6DA;
+$color-dark-cyan:#26A69A;
+$color-dark-skyblue: #738FFE;
+$color-dark-blue: #5C6BC0;
+$color-dark-purple: #7e57c2;
+$color-light-purple: #AB47BC;
+$color-plum-red: #EC407A;
+$color-red: #E84E40;
+$color-orange: #FF7043;
+$color-brown: #8D6E63;
+$color-light-orange: #FFA726;
+$color-yellow: #FFCA28;
+$color-light-green: #CDDC39;
+$color-green: #9CCC65;
+$color-dark-green: #42BD41;
+
+/*focus*/
+input,
+textarea {
+    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    -moz-transition: border-color ease-in-out 0.15s, -moz-box-shadow ease-in-out 0.15s;
+    -ms-transition: border-color ease-in-out 0.15s, -ms-box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgba($color-main, 0.5) !important;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($color-main, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba($color-main, 0.6) !important;
+}
+
+//input提示样式
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: $color-font-tips;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $color-font-tips;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $color-font-tips;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: $color-font-tips;
+}
+
+//表格操作栏样式
+.el-table th {
+    text-align: center !important;
+}
+
+//筛选栏
+.filter-cont {
+    padding: 16px;
+}
+
+//常用宽度
+.w100 {
+    width: 100px;
+}
+
+.w120 {
+    width: 120px;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.w250 {
+    width: 250px;
+}
+
+.w300 {
+    width: 300px;
+}
+
+.w400 {
+    width: 400px;
+}
+
+.w500 {
+    width: 500px;
+}
+//返回按钮
+.btn-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 19px;
+    cursor: pointer;
+    color: $color-font-tips;
+    transition: all 0.2s ease;
+    &:hover {
+        color: $color-main;
+    }
+    &:active {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}
+//上传图片
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+}
+
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}
+
+
+/*loading-box*/
+
+.loading-box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.loading-global {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.loading-global:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: -17px;
+    margin-top: -30px;
+    border: $color-main 4px solid;
+    border-bottom: $color-white 4px solid;
+    -webkit-animation: anim-loading-global 0.8s linear infinite;
+}
+
+.loading-global:before {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    content: "正在加载...";
+    font-size: 12px;
+    color: $color-white;
+}
+
+@-webkit-keyframes anim-loading-global {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}

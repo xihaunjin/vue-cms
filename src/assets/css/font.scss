@@ -1,0 +1,130 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: 'iconfont';  /* project id 377019 */
+  src: url('//at.alicdn.com/t/font_coh2eg1t679icnmi.eot');
+  src: url('//at.alicdn.com/t/font_coh2eg1t679icnmi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_coh2eg1t679icnmi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_coh2eg1t679icnmi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_coh2eg1t679icnmi.svg#iconfont') format('svg');
+}
+.icon {
+    font-style: normal;
+    font-family: "iconfont" !important;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    color: #78909C;
+    font-size: 16px;
+}
+
+.icon-wechet {
+    @extend .icon;
+    &:before {
+        content: "\e634";
+    }
+}
+
+.icon-qq {
+    @extend .icon;
+    &:before {
+        content: "\e614";
+    }
+}
+
+.icon-back {
+    @extend .icon;
+    &:before {
+        content: "\e600";
+    }
+}
+
+.icon-del {
+    @extend .icon;
+    &:before {
+        content: "\e66d";
+    }
+}
+
+.icon-address {
+    @extend .icon;
+    &:before {
+        content: "\e6c2";
+    }
+}
+
+.icon-phone {
+    @extend .icon;
+    &:before {
+        content: "\e640";
+    }
+}
+
+.icon-mail {
+    @extend .icon;
+    &:before {
+        content: "\e604";
+    }
+}
+
+.icon-introduce {
+    @extend .icon;
+    &:before {
+        content: "\e606";
+    }
+}
+
+.icon-man {
+    @extend .icon;
+    &:before {
+        content: "\e62a";
+    }
+}
+
+.icon-woman {
+    @extend .icon;
+    &:before {
+        content: "\e68b";
+    }
+}
+
+.icon-gou {
+    @extend .icon;
+    &:before {
+        content: "\e628";
+    }
+}
+
+.icon-staff {
+    @extend .icon;
+    &:before {
+        content: "\e69f";
+    }
+}
+
+.icon-card {
+    @extend .icon;
+    &:before {
+        content: "\e617";
+    }
+}
+
+.icon-smile {
+    @extend .icon;
+    &:before {
+        content: "\e601";
+    }
+}
+
+.icon-invoice {
+    @extend .icon;
+    &:before {
+        content: "\e69b";
+    }
+}
+.icon-time {
+    @extend .icon;
+    &:before {
+        content: "\e88f";
+    }
+}
+
