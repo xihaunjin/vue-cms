@@ -27,7 +27,9 @@ const request = (method = 'GET') => (url, data = {}) => {
 			},
 			timeout: 10000
 		}).then((response) => {
-			resolve(response.data)
+			if (response.status === 200) {
+				resolve(response.data)
+			}
 		}).catch((error) => {
 			reject(error)
 		})

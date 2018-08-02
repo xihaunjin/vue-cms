@@ -2,16 +2,16 @@
   <div class="staff-details">
     <h1>
       <i class="el-icon-arrow-left btn-back"
-        @click="handleGoBack"></i>{{ruleForm.name}}的详细信息</h1>
+        @click="handleGoBack"></i>{{ruleForm.staffName}}的详细信息</h1>
     <section class="w500">
       <div class="fx-align">
         <div class="pic-cont fx-align">
-          <img :src="ruleForm.photo===''?imgUrl:ruleForm.photo" />
+          <img :src="ruleForm.photoUrl===''?imgUrl:ruleForm.photoUrl" />
         </div>
       </div>
       <!--性别，icon-man为男，icon-woman为女-->
       <h2 class="text-center name-cont">
-        {{ruleForm.name}}
+        {{ruleForm.staffName}}
         <i class="icon-man m-l-5"
           v-if="ruleForm.sex==='男'"></i>
         <i class="icon-woman m-l-5"
@@ -22,7 +22,7 @@
           {{ruleForm.company}}——{{ruleForm.office}}
           <div class="fx-align m-t-5 time">
             <i class="icon-time m-r-5"></i>
-            <span>{{ruleForm.arrival_time|data}}</span>
+            <span>{{ruleForm.arrivalTime}}</span>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
             <span class="c-g">手机：</span>{{ruleForm.phone}}</li>
           <li>
             <i class="icon-mail m-r-5"></i>
-            <span class="c-g">email：</span>1{{ruleForm.email}}</li>
+            <span class="c-g">email：</span>{{ruleForm.email}}</li>
         </ul>
       </div>
       <div class="m-b-15 box">
@@ -69,16 +69,17 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'list',
+  name: 'staff',
   data() {
     return {
       imgUrl: require('../../assets/img/header.jpg'),
       ruleForm: {
-        name: '',
-        photo: '',
+        staffName: '',
+        staffId: '',
+        photoUrl: '',
         sex: '',
         office: '',
-        arrival_time: '',
+        arrivalTime: '',
         company: '',
         phone: '',
         email: '',
@@ -87,19 +88,18 @@ export default {
         address: '',
         introduction: '',
         id: null
-      },
-      value1: ''
+      }
     }
   },
-  filters: {
-    data: function (input) {
-      var d = new Date(input);
-      var year = d.getFullYear();
-      var month = d.getMonth() + 1;
-      var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
-      return year + '-' + month + '-' + day;
-    }
-  },
+  // filters: {
+  //   data: function (input) {
+  //     var d = new Date(input);
+  //     var year = d.getFullYear();
+  //     var month = d.getMonth() + 1;
+  //     var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
+  //     return year + '-' + month + '-' + day;
+  //   }
+  // },
   title() {
     return 'list'
   },
@@ -116,19 +116,20 @@ export default {
       let params = {
         id: this.ruleForm.id
       }
-      this.getStaffInfo(params).then((data) => {
+      this.getStaffInfo(this.ruleForm.id).then((data) => {
         console.log("获取单个员工信息成功")
-        console.log(data.sex)
+        console.log("性别 = " + data.sex)
         let sexObj = data.sex
-        this.ruleForm.name = data.staffName
+        this.ruleForm.staffId = data.staffId
+        this.ruleForm.staffName = data.staffName
         this.ruleForm.sex = this.formatSex(sexObj)
         this.ruleForm.office = data.office
-        this.ruleForm.arrival_time = data.arrivalTime
+        this.ruleForm.arrivalTime = data.arrivalTime
         this.ruleForm.phone = data.phone
         this.ruleForm.company = data.company
         this.ruleForm.email = data.email
         this.ruleForm.introduction = data.introduction
-        this.ruleForm.photo = data.photoUrl
+        this.ruleForm.photoUrl = ''
         if (!this.ruleForm.photo) {
           this.ruleForm.photo = this.imgUrl
         }
@@ -139,42 +140,42 @@ export default {
 
       })
     },
-    //   resetForm() {
-    //     this.ruleForm.name = null
-    //     this.ruleForm.photo = null
-    //     this.ruleForm.sex = null
-    //     this.ruleForm.office = null
-    //     this.ruleForm.arrival_time = null
-    //     this.ruleForm.company = null
-    //     this.ruleForm.phone = null
-    //     this.ruleForm.email = null
-    //     this.ruleForm.introduction = null
-    //     this.ruleForm.id = null
-    //     this.value1 = null
-    //     this.ruleForm.qq = null
-    //     this.ruleForm.wechat = null
-    //     this.ruleForm.address = null
-    //   },
-    //   // 返回上一页
-    //   handleGoBack() {
-    //     this.$back()
-    //   },
+    resetForm() {
+      this.ruleForm.staffId = null
+      this.ruleForm.staffName = null
+      this.ruleForm.photoUrl = null
+      this.ruleForm.sex = null
+      this.ruleForm.office = null
+      this.ruleForm.arrivalTime = null
+      this.ruleForm.company = null
+      this.ruleForm.phone = null
+      this.ruleForm.email = null
+      this.ruleForm.introduction = null
+      this.ruleForm.id = null
+      this.ruleForm.qq = null
+      this.ruleForm.wechat = null
+      this.ruleForm.address = null
+    },
+    // 返回上一页
+    handleGoBack() {
+      this.$router.go(-1)
+    },
     ...mapActions(['getStaffInfo'])
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      console.log(to.query)
-      if (to.query.id) {
-        vm.ruleForm.id = to.query.id;
+      console.log("查看单个员工 " + to.params.id)
+      if (to.params.id) {
+        vm.ruleForm.id = to.params.id;
         // 获取单个员工信息
         vm.handleGetStaffInfo()
       }
     })
   },
-  // beforeRouteLeave(to, from, next) {
-  //   this.resetForm()
-  //   next(true)
-  // }
+  beforeRouteLeave(to, from, next) {
+    this.resetForm()
+    next(true)
+  }
 }
 </script>
 

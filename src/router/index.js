@@ -27,7 +27,7 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/staff/list',
+      path: '/staff/list/',
       name: 'StaffList',
       component: List
     },
@@ -37,7 +37,12 @@ const router = new Router({
       component: AddStaff
     },
     {
-      path: '/staff/info',
+      path: '/staff/update/:id',
+      name: 'UpdateStaff',
+      component: AddStaff
+    },
+    {
+      path: '/staff/info/:id',
       name: 'StaffDetails',
       component: StaffDetails
     }

@@ -1,3 +1,6 @@
 export default {
-	list: []
+	rows: {
+		list: [],
+		total: 0
+	}
 }

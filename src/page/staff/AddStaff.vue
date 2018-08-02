@@ -8,21 +8,26 @@
         :rules="rules"
         ref="ruleForm"
         label-width="100px">
+        <el-form-item label="工号"
+          prop="staffId">
+          <el-input v-model="ruleForm.staffId"
+            placeholder="请输入工号"></el-input>
+        </el-form-item>
         <el-form-item label="姓名"
-          prop="name">
-          <el-input v-model="ruleForm.name"
+          prop="staffName">
+          <el-input v-model="ruleForm.staffName"
             placeholder="请输入姓名"></el-input>
         </el-form-item>
         <el-form-item label="照片"
-          prop="photo">
+          prop="photoUrl">
           <el-upload class="avatar-uploader"
             style="width: 178px;"
             action="/api/uploads"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload">
-            <img v-if="ruleForm.photo"
-              :src="ruleForm.photo"
+            <img v-if="ruleForm.photoUrl"
+              :src="ruleForm.photoUrl"
               class="avatar">
             <i v-else
               class="el-icon-plus avatar-uploader-icon"></i>
@@ -38,15 +43,17 @@
               value="女"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="职位"
+        <el-form-item label="办公地点"
           prop="office">
           <el-input v-model="ruleForm.office"
-            placeholder="请输入职位"></el-input>
+            placeholder="请输入办公地点"></el-input>
         </el-form-item>
         <el-form-item label="入职时间"
-          prop="arrival_time">
-          <el-date-picker v-model="ruleForm.arrival_time"
+          prop="arrivalTime">
+          <el-date-picker v-model="ruleForm.arrivalTime"
             type="date"
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd"
             placeholder="请选择日期">
           </el-date-picker>
         </el-form-item>
@@ -72,9 +79,9 @@
           <el-select v-model="ruleForm.company"
             placeholder="请选择所属公司">
             <el-option label="优车"
-              value="爱车联"></el-option>
+              value="优车"></el-option>
             <el-option label="租车"
-              value="欣业邦"></el-option>
+              value="租车"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="邮箱"
@@ -90,7 +97,8 @@
             v-model="ruleForm.address"
             placeholder="请输入详细地址"></el-input>
         </el-form-item>
-        <el-form-item label="员工简介">
+        <el-form-item label="员工简介"
+          prop="introduction">
           <el-input type="textarea"
             :rows="3"
             resize="none"
@@ -138,11 +146,12 @@ export default {
     return {
       imageUrl: '',
       ruleForm: {
-        name: '',
-        photo: '',
+        staffName: '',
+        staffId: '',
+        photoUrl: '',
         sex: '',
         office: '',
-        arrival_time: '',
+        arrivalTime: '',
         company: '',
         phone: '',
         email: '',
@@ -150,61 +159,66 @@ export default {
         wechat: '',
         address: '',
         introduction: '',
-        id: null
+        id: '',
       },
       rules: {
-        name: [{
+        staffName: [{
           required: true,
           message: '姓名不能为空！',
           trigger: 'blur'
         }],
-        photo: [{
-          required: false,
-          message: '请上传照片！',
-          trigger: 'change'
-        }],
-        sex: [{
-          required: true,
-          message: '请选择性别！',
-          trigger: 'change'
-        }],
-        office: [{
-          required: true,
-          message: '职位不能为空！',
-          trigger: 'blur'
-        }],
-        arrival_time: [{
-          type: 'date',
-          validator: reArrivalTime,
-          required: true,
-          trigger: 'blur'
-        }],
-        company: [{
-          required: true,
-          message: '请选择公司！',
-          trigger: 'change'
-        }],
+        // photo: [{
+        //   required: false,
+        //   message: '请上传照片！',
+        //   trigger: 'change'
+        // }],
+        // sex: [{
+        //   required: true,
+        //   message: '请选择性别！',
+        //   trigger: 'change'
+        // }],
+        // office: [{
+        //   required: true,
+        //   message: '职位不能为空！',
+        //   trigger: 'blur'
+        // }],
+        // arrival_time: [{
+        //   type: 'date',
+        //   validator: reArrivalTime,
+        //   required: true,
+        //   trigger: 'blur'
+        // }],
+        // company: [{
+        //   required: true,
+        //   message: '请选择公司！',
+        //   trigger: 'change'
+        // }],
         address: [{
           required: true,
           message: '地址不能为空！',
           trigger: 'blur'
         }],
-        phone: [{
-          required: true,
-          validator: rePhone,
-          trigger: 'blur'
-        }],
-        email: [{
-          required: true,
-          validator: reMail,
-          trigger: 'blur'
-        }]
+        // phone: [{
+        //   required: true,
+        //   validator: rePhone,
+        //   trigger: 'blur'
+        // }],
+        // email: [{
+        //   required: true,
+        //   validator: reMail,
+        //   trigger: 'blur'
+        // }]
       },
       value1: ''
     }
   },
   title() {
     return 'list'
+  },
+  watch: {
+    // "$route": function (to, from) {
+    //   this.$router.go(0);
+    // }
   },
   methods: {
     // 性别转换
@@ -216,7 +230,7 @@ export default {
     },
     // 保存用户信息
     submitForm(formName) {
-      console.log(this.value1)
+      console.log('保存id = ' + this.ruleForm.id)
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$confirm('确认提交吗?', '提示', {
@@ -229,7 +243,7 @@ export default {
                 message: '保存成功',
                 type: 'success'
               })
-              window.history.back()
+              this.$router.go(-1)
             })
           }).catch(() => { })
         } else {
@@ -238,49 +252,49 @@ export default {
       })
     },
     // 获取单个员工信息
-    handleGetSingleStaffInfo() {
-      let params = {
-        id: this.ruleForm.id
-      }
-      this.getSingleStaff(params).then((data) => {
-        console.log(data.sex)
+    handleGetStaffInfo() {
+      this.getStaffInfo(this.ruleForm.id).then((data) => {
+        console.log('性别 = ' + data.sex)
         let sexObj = data.sex
-        this.ruleForm.name = data.name
+        this.ruleForm.id = data.id
+        this.ruleForm.staffName = data.staffName
+        this.ruleForm.staffId = data.staffId
         this.ruleForm.sex = this.formatSex(sexObj)
         this.ruleForm.office = data.office
-        this.ruleForm.arrival_time = data.arrival_time
+        this.ruleForm.arrivalTime = data.arrivalTime
         this.ruleForm.phone = data.phone
         this.ruleForm.company = data.company
         this.ruleForm.email = data.email
         this.ruleForm.introduction = data.introduction
-        this.ruleForm.photo = data.photo
+        this.ruleForm.photoUrl = data.photoUrl
         this.ruleForm.qq = data.qq
         this.ruleForm.wechat = data.wechat
         this.ruleForm.address = data.address
-        console.log(this.ruleForm.arrival_time)
+        console.log("日期 = " + this.ruleForm.arrivalTime)
       }, () => {
 
       })
     },
     resetForm() {
-      this.$refs.ruleForm.resetFields()
+      this.$refs.ruleForm.resetFields();
+      this.ruleForm.id = ''
     },
-    //			resetForm() {
-    //				this.ruleForm.name = ''
-    //				this.ruleForm.photo = ''
-    //				this.ruleForm.sex = ''
-    //				this.ruleForm.office = ''
-    //				this.ruleForm.arrival_time = ''
-    //				this.ruleForm.company = ''
-    //				this.ruleForm.phone = ''
-    //				this.ruleForm.email = ''
-    //				this.ruleForm.introduction = ''
-    //				this.ruleForm.id = null
-    //				this.value1 = ''
-    //				this.ruleForm.qq = ''
-    //				this.ruleForm.wechat = ''
-    //				this.ruleForm.address = ''
-    //			},
+    // resetForm() {
+    //   this.ruleForm.staffId = ''
+    //   this.ruleForm.staffName = ''
+    //   this.ruleForm.photoUrl = ''
+    //   this.ruleForm.sex = ''
+    //   this.ruleForm.office = ''
+    //   this.ruleForm.arrivalTime = ''
+    //   this.ruleForm.company = ''
+    //   this.ruleForm.phone = ''
+    //   this.ruleForm.email = ''
+    //   this.ruleForm.introduction = ''
+    //   this.ruleForm.id = ''
+    //   this.ruleForm.qq = ''
+    //   this.ruleForm.wechat = ''
+    //   this.ruleForm.address = ''
+    // },
     handleAvatarSuccess(res, file) {
       this.$log(file)
       this.$log('----------------')
@@ -306,23 +320,26 @@ export default {
     handleGoBack() {
       this.$back()
     },
-    ...mapActions(['saveStaffInfo', 'getSingleStaff'])
+    ...mapActions(['saveStaffInfo', 'getStaffInfo'])
   },
   beforeRouteEnter(to, from, next) {
+    console.log('beforeRouteEnter---add')
     next(vm => {
-      console.log(to.query)
-      if (to.query.id) {
+      console.log(to.params.id)
+      if (to.params.id) {
         console.log('编辑')
-        vm.ruleForm.id = to.query.id;
+        vm.ruleForm.id = to.params.id;
         // 获取单个员工信息
-        vm.handleGetSingleStaffInfo()
+        vm.handleGetStaffInfo()
       }
     })
   },
   beforeRouteLeave(to, from, next) {
+    console.log('beforeRouteLeave+ = ' + this.ruleForm.id)
     // 清空输入信息
-    this.resetForm();
-    next(true)
+    this.resetForm()
+    console.log('beforeRouteLeave- = ' + this.ruleForm.staffName)
+    next()
   }
 }
 </script>
