@@ -11,57 +11,30 @@
 				</el-select>-->
       </div>
       <div class="w300 fx">
-        <el-input placeholder="请输入搜索关键词"
-          v-model="input2"></el-input>
-        <el-button type="primary"
-          @click="handleSearch"
-          class="m-l-10">搜索</el-button>
+        <el-input placeholder="请输入搜索关键词" v-model="input2"></el-input>
+        <el-button type="primary" @click="handleSearch" class="m-l-10">搜索</el-button>
       </div>
     </section>
-    <el-table :data="staffList.list"
-      border
-      style="width: 100%">
-      <el-table-column prop="staffId"
-        label="工号"></el-table-column>
-      <el-table-column prop="staffName"
-        label="姓名"></el-table-column>
-      <el-table-column prop="sex"
-        label="性别"
-        :formatter="formatSex"></el-table-column>
-      <el-table-column prop="company"
-        label="所属公司"></el-table-column>
-      <el-table-column prop="office"
-        label="办公地点"></el-table-column>
-      <el-table-column prop="phone"
-        label="手机"></el-table-column>
-      <el-table-column prop="email"
-        label="邮箱"></el-table-column>
-      <el-table-column label="操作"
-        width="180px">
+    <el-table :data="staffList.list" border style="width: 100%">
+      <el-table-column prop="staffId" label="工号"></el-table-column>
+      <el-table-column prop="staffName" label="姓名"></el-table-column>
+      <el-table-column prop="sex" label="性别" :formatter="formatSex"></el-table-column>
+      <el-table-column prop="company" label="所属公司"></el-table-column>
+      <el-table-column prop="office" label="办公地点"></el-table-column>
+      <el-table-column prop="phone" label="手机"></el-table-column>
+      <el-table-column prop="email" label="邮箱"></el-table-column>
+      <el-table-column label="操作" width="180px">
         <template slot-scope="scope">
-          <el-button type="text"
-            size="small">名片</el-button>
-          <el-button @click="handleGetStaffInfo(scope.row.id)"
-            type="text"
-            size="small">查看</el-button>
-          <el-button @click="handleEditStaff(scope.row.id)"
-            type="text"
-            size="small">编辑</el-button>
-          <el-button @click="handleDelete(scope.$index, scope.row.id)"
-            type="text"
-            size="small">删除</el-button>
+          <el-button type="text" size="small">名片</el-button>
+          <el-button @click="handleGetStaffInfo(scope.row.id)" type="text" size="small">查看</el-button>
+          <el-button @click="handleEditStaff(scope.row.id)" type="text" size="small">编辑</el-button>
+          <el-button @click="handleDelete(scope.$index, scope.row.id)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <section class="add-cont fx fx-y-center fx-x-between">
-      <el-button type="primary"
-        @click="handleAddStaff(null)">添加员工</el-button>
-      <el-pagination v-show="staffList.total > params.limit"
-        @current-change="handleCurrentChange"
-        :page-size="params.limit"
-        :background="true"
-        layout="prev, pager, next, jumper"
-        :total="staffList.total">
+      <el-button type="primary" @click="handleAddStaff(null)">添加员工</el-button>
+      <el-pagination v-show="staffList.total > params.limit" @current-change="handleCurrentChange" :page-size="params.limit" :background="true" layout="prev, pager, next, jumper" :total="staffList.total">
       </el-pagination>
     </section>
   </div>

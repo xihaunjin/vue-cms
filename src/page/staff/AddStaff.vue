@@ -1,113 +1,60 @@
 <template>
   <div class="add-staff">
     <h1>
-      <i class="el-icon-arrow-left btn-back"
-        @click="handleGoBack"></i>员工信息</h1>
+      <i class="el-icon-arrow-left btn-back" @click="handleGoBack"></i>员工信息</h1>
     <div class="staff-dtl p-t-20">
-      <el-form :model="ruleForm"
-        :rules="rules"
-        ref="ruleForm"
-        label-width="100px">
-        <el-form-item label="工号"
-          prop="staffId">
-          <el-input v-model="ruleForm.staffId"
-            placeholder="请输入工号"></el-input>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+        <el-form-item label="工号" prop="staffId">
+          <el-input v-model="ruleForm.staffId" placeholder="请输入工号"></el-input>
         </el-form-item>
-        <el-form-item label="姓名"
-          prop="staffName">
-          <el-input v-model="ruleForm.staffName"
-            placeholder="请输入姓名"></el-input>
+        <el-form-item label="姓名" prop="staffName">
+          <el-input v-model="ruleForm.staffName" placeholder="请输入姓名"></el-input>
         </el-form-item>
-        <el-form-item label="照片"
-          prop="photoUrl">
-          <el-upload class="avatar-uploader"
-            style="width: 178px;"
-            action="/api/uploads"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
-            <img v-if="ruleForm.photoUrl"
-              :src="ruleForm.photoUrl"
-              class="avatar">
-            <i v-else
-              class="el-icon-plus avatar-uploader-icon"></i>
+        <el-form-item label="照片" prop="photoUrl">
+          <el-upload class="avatar-uploader" style="width: 178px;" action="/api/upload" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+            <img v-if="ruleForm.photoUrl" :src="ruleForm.photoUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
-        <el-form-item label="性别"
-          prop="sex">
-          <el-select v-model="ruleForm.sex"
-            placeholder="请选择性别">
-            <el-option label="男"
-              value="男"></el-option>
-            <el-option label="女"
-              value="女"></el-option>
+        <el-form-item label="性别" prop="sex">
+          <el-select v-model="ruleForm.sex" placeholder="请选择性别">
+            <el-option label="男" value="男"></el-option>
+            <el-option label="女" value="女"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="办公地点"
-          prop="office">
-          <el-input v-model="ruleForm.office"
-            placeholder="请输入办公地点"></el-input>
+        <el-form-item label="办公地点" prop="office">
+          <el-input v-model="ruleForm.office" placeholder="请输入办公地点"></el-input>
         </el-form-item>
-        <el-form-item label="入职时间"
-          prop="arrivalTime">
-          <el-date-picker v-model="ruleForm.arrivalTime"
-            type="date"
-            format="yyyy-MM-dd"
-            value-format="yyyy-MM-dd"
-            placeholder="请选择日期">
+        <el-form-item label="入职时间" prop="arrivalTime">
+          <el-date-picker v-model="ruleForm.arrivalTime" type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" placeholder="请选择日期">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="电话"
-          prop="phone">
-          <el-input v-model="ruleForm.phone"
-            placeholder="请输入电话"
-            :maxlength=11></el-input>
+        <el-form-item label="电话" prop="phone">
+          <el-input v-model="ruleForm.phone" placeholder="请输入电话" :maxlength=11></el-input>
         </el-form-item>
-        <el-form-item label="QQ"
-          prop="qq">
-          <el-input v-model="ruleForm.qq"
-            placeholder="请输入QQ号码"
-            :maxlength=10></el-input>
+        <el-form-item label="QQ" prop="qq">
+          <el-input v-model="ruleForm.qq" placeholder="请输入QQ号码" :maxlength=10></el-input>
         </el-form-item>
-        <el-form-item label="微信"
-          prop="wechat">
-          <el-input v-model="ruleForm.wechat"
-            placeholder="请输入微信号"></el-input>
+        <el-form-item label="微信" prop="wechat">
+          <el-input v-model="ruleForm.wechat" placeholder="请输入微信号"></el-input>
         </el-form-item>
-        <el-form-item label="子公司"
-          prop="company">
-          <el-select v-model="ruleForm.company"
-            placeholder="请选择所属公司">
-            <el-option label="优车"
-              value="优车"></el-option>
-            <el-option label="租车"
-              value="租车"></el-option>
+        <el-form-item label="子公司" prop="company">
+          <el-select v-model="ruleForm.company" placeholder="请选择所属公司">
+            <el-option label="优车" value="优车"></el-option>
+            <el-option label="租车" value="租车"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="邮箱"
-          prop="email">
-          <el-input v-model="ruleForm.email"
-            placeholder="请输入邮箱"></el-input>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="ruleForm.email" placeholder="请输入邮箱"></el-input>
         </el-form-item>
-        <el-form-item label="地址"
-          prop="address">
-          <el-input type="textarea"
-            :rows="2"
-            resize="none"
-            v-model="ruleForm.address"
-            placeholder="请输入详细地址"></el-input>
+        <el-form-item label="地址" prop="address">
+          <el-input type="textarea" :rows="2" resize="none" v-model="ruleForm.address" placeholder="请输入详细地址"></el-input>
         </el-form-item>
-        <el-form-item label="员工简介"
-          prop="introduction">
-          <el-input type="textarea"
-            :rows="3"
-            resize="none"
-            v-model="ruleForm.introduction"
-            placeholder="请添加员工简介"></el-input>
+        <el-form-item label="员工简介" prop="introduction">
+          <el-input type="textarea" :rows="3" resize="none" v-model="ruleForm.introduction" placeholder="请添加员工简介"></el-input>
         </el-form-item>
         <el-form-item label-width="100px">
-          <el-button type="primary"
-            @click="submitForm('ruleForm')">保存</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -144,6 +91,7 @@ export default {
   name: 'list',
   data() {
     return {
+      upData: {},
       imageUrl: '',
       ruleForm: {
         staffName: '',
@@ -162,11 +110,11 @@ export default {
         id: '',
       },
       rules: {
-        staffName: [{
-          required: true,
-          message: '姓名不能为空！',
-          trigger: 'blur'
-        }],
+        // staffName: [{
+        //   required: true,
+        //   message: '姓名不能为空！',
+        //   trigger: 'blur'
+        // }],
         // photo: [{
         //   required: false,
         //   message: '请上传照片！',
@@ -193,11 +141,11 @@ export default {
         //   message: '请选择公司！',
         //   trigger: 'change'
         // }],
-        address: [{
-          required: true,
-          message: '地址不能为空！',
-          trigger: 'blur'
-        }],
+        // address: [{
+        //   required: true,
+        //   message: '地址不能为空！',
+        //   trigger: 'blur'
+        // }],
         // phone: [{
         //   required: true,
         //   validator: rePhone,
@@ -253,24 +201,22 @@ export default {
     },
     // 获取单个员工信息
     handleGetStaffInfo() {
-      this.getStaffInfo(this.ruleForm.id).then((data) => {
-        console.log('性别 = ' + data.sex)
-        let sexObj = data.sex
-        this.ruleForm.id = data.id
-        this.ruleForm.staffName = data.staffName
-        this.ruleForm.staffId = data.staffId
+      this.getStaffInfo(this.ruleForm.id).then((res) => {
+        console.log('性别 = ' + res.data.staffInfo.sex)
+        let sexObj = res.data.staffInfo.sex
+        this.ruleForm.staffId = res.data.staffInfo.staffId
+        this.ruleForm.staffName = res.data.staffInfo.staffName
         this.ruleForm.sex = this.formatSex(sexObj)
-        this.ruleForm.office = data.office
-        this.ruleForm.arrivalTime = data.arrivalTime
-        this.ruleForm.phone = data.phone
-        this.ruleForm.company = data.company
-        this.ruleForm.email = data.email
-        this.ruleForm.introduction = data.introduction
-        this.ruleForm.photoUrl = data.photoUrl
-        this.ruleForm.qq = data.qq
-        this.ruleForm.wechat = data.wechat
-        this.ruleForm.address = data.address
-        console.log("日期 = " + this.ruleForm.arrivalTime)
+        this.ruleForm.office = res.data.staffInfo.office
+        this.ruleForm.arrivalTime = res.data.staffInfo.arrivalTime
+        this.ruleForm.phone = res.data.staffInfo.phone
+        this.ruleForm.company = res.data.staffInfo.company
+        this.ruleForm.email = res.data.staffInfo.email
+        this.ruleForm.introduction = res.data.staffInfo.introduction
+        this.ruleForm.photoUrl = res.data.staffInfo.photoUrl
+        this.ruleForm.qq = res.data.staffInfo.qq
+        this.ruleForm.wechat = res.data.staffInfo.wechat
+        this.ruleForm.address = res.data.staffInfo.address
       }, () => {
 
       })
@@ -295,32 +241,47 @@ export default {
     //   this.ruleForm.wechat = ''
     //   this.ruleForm.address = ''
     // },
+    // handleUpload() {
+    //   this.uploadFile(this.upData).then((res) => {
+    //     console.log('上传成功')
+    //     console.log(res)
+    //     this.ruleForm.photoUrl = res.data.url
+    //     console.log(this.ruleForm.photoUrl)
+    //   }, () => {
+    //   })
+    // },
+
     handleAvatarSuccess(res, file) {
-      this.$log(file)
-      this.$log('----------------')
-      this.$log(file.response)
-      if (!file.response.data.code) {
-        this.ruleForm.photo = file.response.data.url
-        console.log(this.ruleForm.photo)
+      console.log(file)
+      console.log('----------------')
+      console.log("+++" + res.code)
+      if (res.code === 200) {
+        this.ruleForm.photoUrl = res.data.url
+        console.log(this.ruleForm.photoUrl)
       }
     },
     beforeAvatarUpload(file) {
+      console.log(file)
       const isJPG = file.type === 'image/jpeg'
       const isPNG = file.type === 'image/png'
       const isLtSize = file.size / 1024 / 1024 < 1
       if (!(isJPG || isPNG)) {
         this.$message.error('上传照片只能是 JPG或者PNG 格式!');
+        return false
       }
       if (!isLtSize) {
         this.$message.error('上传头像图片大小不能超过 1M!');
+        return false
       }
-      return isLtSize && (isJPG || isPNG);
+      this.upData = new FormData()
+      this.upData.append("file", file)
+
     },
     // 返回上一页
     handleGoBack() {
-      this.$back()
+      this.$router.go(-1)
     },
-    ...mapActions(['saveStaffInfo', 'getStaffInfo'])
+    ...mapActions(['saveStaffInfo', 'getStaffInfo', 'uploadFile'])
   },
   beforeRouteEnter(to, from, next) {
     console.log('beforeRouteEnter---add')

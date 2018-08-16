@@ -8,7 +8,23 @@ const POST_STAFF_SAVE = '/api/staff/save'
 const POST_STAFF_DELETE = '/api/staff/delete'
 const GET_STAFF_INFO = '/api/staff/info'
 const POST_STAFF_UPDATE = '/api/staff/update'
+const POST_IMG_UPLOAD = '/api/upload'
 export default {
+  uploadFile: ({
+    commit,
+    dispatch,
+    state,
+    getters
+  }, params = {}) => {
+    return new Promise((resolve, reject) => {
+      http.post(POST_IMG_UPLOAD, params).then((res = null) => {
+        resolve(res)
+      }, (err) => {
+        reject(err.message)
+      })
+    })
+  },
+
   // 获取员工列表
   getStaffList: ({
     commit,

@@ -1,5 +1,5 @@
 export default {
-  GET_STAFF_LIST: (state, data) => {
-    state.rows = data
+  GET_STAFF_LIST: (state, res) => {
+    state.rows = res.data
   }
 }

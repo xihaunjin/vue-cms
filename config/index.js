@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8081/ssmdemo/',
+        target: 'http://127.0.0.1:8081/ssmdemo/api',
+        // target: 'http://35.236.138.158:8080/ssmdemo/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

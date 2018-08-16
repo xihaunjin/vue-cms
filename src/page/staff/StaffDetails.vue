@@ -1,8 +1,7 @@
 <template>
   <div class="staff-details">
     <h1>
-      <i class="el-icon-arrow-left btn-back"
-        @click="handleGoBack"></i>{{ruleForm.staffName}}的详细信息</h1>
+      <i class="el-icon-arrow-left btn-back" @click="handleGoBack"></i>{{ruleForm.staffName}}的详细信息</h1>
     <section class="w500">
       <div class="fx-align">
         <div class="pic-cont fx-align">
@@ -12,10 +11,8 @@
       <!--性别，icon-man为男，icon-woman为女-->
       <h2 class="text-center name-cont">
         {{ruleForm.staffName}}
-        <i class="icon-man m-l-5"
-          v-if="ruleForm.sex==='男'"></i>
-        <i class="icon-woman m-l-5"
-          v-else></i>
+        <i class="icon-man m-l-5" v-if="ruleForm.sex==='男'"></i>
+        <i class="icon-woman m-l-5" v-else></i>
       </h2>
       <div class="fx-align m-b-30">
         <div>
@@ -57,10 +54,8 @@
           <i class="icon-introduce m-r-5"></i>
           <span class="c-g">简介：</span>
         </div>
-        <p v-if="ruleForm.introduction"
-          class="box-flex">{{ruleForm.introduction}}</p>
-        <p v-else
-          class="box-flex">这个人很懒，什么都没留下！</p>
+        <p v-if="ruleForm.introduction" class="box-flex">{{ruleForm.introduction}}</p>
+        <p v-else class="box-flex">这个人很懒，什么都没留下！</p>
       </div>
     </section>
   </div>
@@ -116,26 +111,23 @@ export default {
       let params = {
         id: this.ruleForm.id
       }
-      this.getStaffInfo(this.ruleForm.id).then((data) => {
+      this.getStaffInfo(this.ruleForm.id).then((res) => {
         console.log("获取单个员工信息成功")
-        console.log("性别 = " + data.sex)
-        let sexObj = data.sex
-        this.ruleForm.staffId = data.staffId
-        this.ruleForm.staffName = data.staffName
+        console.log("性别 = " + res.data.staffInfo.sex)
+        let sexObj = res.data.staffInfo.sex
+        this.ruleForm.staffId = res.data.staffInfo.staffId
+        this.ruleForm.staffName = res.data.staffInfo.staffName
         this.ruleForm.sex = this.formatSex(sexObj)
-        this.ruleForm.office = data.office
-        this.ruleForm.arrivalTime = data.arrivalTime
-        this.ruleForm.phone = data.phone
-        this.ruleForm.company = data.company
-        this.ruleForm.email = data.email
-        this.ruleForm.introduction = data.introduction
-        this.ruleForm.photoUrl = ''
-        if (!this.ruleForm.photo) {
-          this.ruleForm.photo = this.imgUrl
-        }
-        this.ruleForm.qq = data.qq
-        this.ruleForm.wechat = data.wechat
-        this.ruleForm.address = data.address
+        this.ruleForm.office = res.data.staffInfo.office
+        this.ruleForm.arrivalTime = res.data.staffInfo.arrivalTime
+        this.ruleForm.phone = res.data.staffInfo.phone
+        this.ruleForm.company = res.data.staffInfo.company
+        this.ruleForm.email = res.data.staffInfo.email
+        this.ruleForm.introduction = res.data.staffInfo.introduction
+        this.ruleForm.photoUrl = res.data.staffInfo.photoUrl
+        this.ruleForm.qq = res.data.staffInfo.qq
+        this.ruleForm.wechat = res.data.staffInfo.wechat
+        this.ruleForm.address = res.data.staffInfo.address
       }, () => {
 
       })
