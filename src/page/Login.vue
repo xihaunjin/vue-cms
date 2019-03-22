@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <footer>神州优车集团</footer>
+    <footer>巴拉巴拉巴拉</footer>
   </div>
 </template>
 <script>
@@ -123,14 +123,14 @@ footer {
 }
 
 .login-cont {
-  padding-top: 200px;
+  padding-top: 60px;
   width: 100%;
   height: 100%;
   background: url(../assets/img/login_bg.jpg) center center no-repeat;
   background-size: 100% 100%;
   .logo-cont {
     width: 300px;
-    height: 150px;
+    height: 300px;
     padding: 10px;
     // background: $color-white;
     overflow: hidden;
