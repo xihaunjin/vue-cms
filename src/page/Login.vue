@@ -1,119 +1,104 @@
 <template>
-	<div class="login-wapper">
-		<div class="login-cont">
-			<div class="fx-align">
-				<div class="logo-cont fx-align"><img src="../assets/img/logo.png" /></div>
-			</div>
-			<div class="form-cont">
-				<div class="input-cont">
-					<input type="tel"
-					  name=""
-					  id=""
-					  value=""
-					  placeholder="手机号"
-					  maxlength="11"
-					  v-model="params.phone" />
-				</div>
-				<div class="input-cont m-t-30">
-					<input type="number"
-					  name=""
-					  id=""
-					  value=""
-					  placeholder="验证码"
-					  v-model="params.code"
-					  maxlength="4" />
-					<!--点击发送之后显示倒计时-->
-					<a class="btn-code"
-					  @click="handleSendCode">{{codeText}}</a>
-				</div>
-				<div class="btn-cont fx-align">
-					<a class="btn-login"
-					  @click="handleLogin">登
-						<span class="p-l-15"></span>录</a>
-				</div>
-			</div>
-		</div>
-		<footer>神州优车集团</footer>
-	</div>
+  <div class="login-wapper">
+    <div class="login-cont">
+      <div class="fx-align">
+        <div class="logo-cont fx-align"><img src="../assets/img/logo.png" /></div>
+      </div>
+      <div class="form-cont">
+        <div class="input-cont">
+          <input type="tel" name="" id="" value="" placeholder="手机号" maxlength="11" v-model="params.phone" />
+        </div>
+        <div class="input-cont m-t-30">
+          <input type="number" name="" id="" value="" placeholder="验证码" v-model="params.code" maxlength="4" />
+          <!--点击发送之后显示倒计时-->
+          <a class="btn-code" @click="handleSendCode">{{codeText}}</a>
+        </div>
+        <div class="btn-cont fx-align">
+          <a class="btn-login" @click="handleLogin">登
+            <span class="p-l-15"></span>录</a>
+        </div>
+      </div>
+    </div>
+    <footer>神州优车集团</footer>
+  </div>
 </template>
 <script>
 import {
-	mapActions
+  mapActions
 } from 'vuex'
 const rePhone = (value) => {
-	return /^(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/.test(value)
+  return /^(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/.test(value)
 }
 export default {
-	name: 'login',
-	data() {
-		return {
-			params: {
-				phone: null,
-				code: null
-			},
-			codeParams: {
-				phone: null
-			},
-			codeText: '获取验证码',
-			active: false
-		}
-	},
-	title() {
-		return '登录'
-	},
-	methods: {
-		handleSendCode() {
-			if (!rePhone(this.params.phone)) {
-				this.$message.warning('请输入正确的手机号 ( ･´ω`･ )')
-				return
-			}
-			if (this.active) {
-				return
-			}
-			this.sendCode(this.params).then(() => {
-				console.log('发送成功')
-				this.$message.success('获取验证码成功')
-				this.active = true
-				let timeCont = 59
-				this.codeText = timeCont + 's'
-				let timer = setInterval(() => {
-					console.log(timeCont)
-					if (timeCont === 0) {
-						clearInterval(timer) // 停止计时器
-						this.codeText = '获取验证码'
-						this.active = false
-					} else {
-						timeCont--;
-						this.codeText = timeCont + 's'
-					}
-				}, 1000)
-			}, (err) => {
-				console.log('发送失败')
-				this.$message.warning(err)
-			})
-		},
-		handleLogin() {
-			if (!rePhone(this.params.phone)) {
-				this.$message.warning('请输入正确的手机号 ( ･´ω`･ )')
-				return
-			}
-			if (this.params.code.length !== 4) {
-				this.$message.warning('请输入四位验证码')
-				return
-			}
-			//				console.log(this.params.code)
-			this.login(this.params).then(() => {
-				this.$message.success('登录成功')
-				this.$router.replace({
-					name: 'List'
-				})
-			}, (err) => {
-				console.log(err)
-				this.$message.error(err)
-			})
-		},
-		...mapActions(['login', 'sendCode']) // 映射 this.LOGIN() 为 this.$store.dispatch('login')
-	}
+  name: 'login',
+  data() {
+    return {
+      params: {
+        phone: null,
+        code: null
+      },
+      codeParams: {
+        phone: null
+      },
+      codeText: '获取验证码',
+      active: false
+    }
+  },
+  title() {
+    return '登录'
+  },
+  methods: {
+    handleSendCode() {
+      if (!rePhone(this.params.phone)) {
+        this.$message.warning('请输入正确的手机号 ( ･´ω`･ )')
+        return
+      }
+      if (this.active) {
+        return
+      }
+      this.sendCode(this.params).then(() => {
+        console.log('发送成功')
+        this.$message.success('获取验证码成功')
+        this.active = true
+        let timeCont = 59
+        this.codeText = timeCont + 's'
+        let timer = setInterval(() => {
+          console.log(timeCont)
+          if (timeCont === 0) {
+            clearInterval(timer) // 停止计时器
+            this.codeText = '获取验证码'
+            this.active = false
+          } else {
+            timeCont--;
+            this.codeText = timeCont + 's'
+          }
+        }, 1000)
+      }, (err) => {
+        console.log('发送失败')
+        this.$message.warning(err)
+      })
+    },
+    handleLogin() {
+      if (!rePhone(this.params.phone)) {
+        this.$message.warning('请输入正确的手机号 ( ･´ω`･ )')
+        return
+      }
+      if (this.params.code.length !== 4) {
+        this.$message.warning('请输入四位验证码')
+        return
+      }
+      this.login(this.params).then(() => {
+        this.$message.success('登录成功')
+        this.$router.replace({
+          name: 'List'
+        })
+      }, (err) => {
+        console.log(err)
+        this.$message.error(err)
+      })
+    },
+    ...mapActions(['login', 'sendCode']) // 映射 this.LOGIN() 为 this.$store.dispatch('login')
+  }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

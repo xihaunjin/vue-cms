@@ -2,27 +2,19 @@
   <div class="page-menu">
     <nav class="fx-align">
       <ul class="fx">
-        <router-link :to="{ path: '/1'}"
-          tag="li"
-          class="fx-align">
+        <router-link :to="{ path: '/1'}" tag="li" class="fx-align">
           <div class="tips-cont">发票抬头管理</div>
           <i class="icon-invoice"></i>
         </router-link>
-        <router-link :to="{ path: '/staff/list'}"
-          tag="li"
-          class="fx-align">
+        <router-link :to="{ path: '/staff/list'}" tag="li" class="fx-align">
           <div class="tips-cont">员工管理</div>
           <i class="icon-staff"></i>
         </router-link>
-        <router-link :to="{ path: '/2'}"
-          tag="li"
-          class="fx-align">
+        <router-link :to="{ path: '/2'}" tag="li" class="fx-align">
           <div class="tips-cont">性格测试</div>
           <i class="icon-smile"></i>
         </router-link>
-        <router-link :to="{ path: '/3'}"
-          tag="li"
-          class="fx-align">
+        <router-link :to="{ path: '/3'}" tag="li" class="fx-align">
           <div class="tips-cont">名片模板</div>
           <i class="icon-card"></i>
         </router-link>

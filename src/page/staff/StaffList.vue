@@ -2,14 +2,6 @@
   <div class="staff-list">
     <h1 class="text-center">员工列表</h1>
     <section class="filter-cont fx fx-x-between">
-      <div>
-        <!--<el-select v-model="value4" clearable placeholder="请选择">
-					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-				</el-select>
-				<el-select v-model="value4" clearable placeholder="请选择">
-					<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-				</el-select>-->
-      </div>
       <div class="w300 fx">
         <el-input placeholder="请输入搜索关键词" v-model="input2"></el-input>
         <el-button type="primary" @click="handleSearch" class="m-l-10">搜索</el-button>

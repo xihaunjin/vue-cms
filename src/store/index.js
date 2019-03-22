@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex)
 import staff from './staff/index'
+
+Vue.use(Vuex)
 // import login from './login/index'
 const store = new Vuex.Store({
-	modules: {
-		staff
-		// login,
-	}
+  modules: {
+    staff
+    // login,
+  }
 })
 export default store

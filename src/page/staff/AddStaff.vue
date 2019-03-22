@@ -13,7 +13,7 @@
         <el-form-item label="照片" prop="photoUrl">
           <el-upload class="avatar-uploader" style="width: 178px;" action="/api/upload" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
             <img v-if="ruleForm.photoUrl" :src="ruleForm.photoUrl" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            <i v -else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
@@ -63,30 +63,30 @@
 
 <script>
 import { mapActions } from 'vuex'
-var rePhone = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error('手机号码不能为空！'));
-  }
-  if (!/^(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/.test(value)) {
-    return callback(new Error('手机号码不正确！'));
-  }
-  callback();
-}
-var reMail = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error('邮箱不能为空！'));
-  }
-  if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
-    return callback(new Error('邮箱地址不正确！'));
-  }
-  callback();
-}
-var reArrivalTime = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error('请选择入职时间！'));
-  }
-  callback();
-}
+// var rePhone = (rule, value, callback) => {
+//   if (!value) {
+//     return callback(new Error('手机号码不能为空！'));
+//   }
+//   if (!/^(13[0-9]|15[0-9]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/.test(value)) {
+//     return callback(new Error('手机号码不正确！'));
+//   }
+//   callback();
+// }
+// var reMail = (rule, value, callback) => {
+//   if (!value) {
+//     return callback(new Error('邮箱不能为空！'));
+//   }
+//   if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
+//     return callback(new Error('邮箱地址不正确！'));
+//   }
+//   callback();
+// }
+// var reArrivalTime = (rule, value, callback) => {
+//   if (!value) {
+//     return callback(new Error('请选择入职时间！'));
+//   }
+//   callback();
+// }
 export default {
   name: 'list',
   data() {
@@ -275,7 +275,6 @@ export default {
       }
       this.upData = new FormData()
       this.upData.append("file", file)
-
     },
     // 返回上一页
     handleGoBack() {

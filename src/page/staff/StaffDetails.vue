@@ -108,9 +108,9 @@ export default {
     },
     // 获取单个员工信息
     handleGetStaffInfo() {
-      let params = {
-        id: this.ruleForm.id
-      }
+      // let params = {
+      //   id: this.ruleForm.id
+      // }
       this.getStaffInfo(this.ruleForm.id).then((res) => {
         console.log("获取单个员工信息成功")
         console.log("性别 = " + res.data.staffInfo.sex)

@@ -1,21 +1,21 @@
 <template>
-	<div class="hello">
-		Hello {{name}}
-	</div>
+  <div class="hello">
+    Hello {{name}}
+  </div>
 </template>
 
 <script>
 export default {
-	name: 'hello',
-	data() {
-		return {
-			msg: 'Welcome to Your Vue.js App',
-			name: 'xihuanjin'
-		}
-	},
-	title() {
-		return 'hello'
-	}
+  name: 'hello',
+  data() {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      name: 'xihuanjin'
+    }
+  },
+  title() {
+    return 'hello'
+  }
 }
 </script>
 
